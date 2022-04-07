@@ -2,78 +2,112 @@ package SmartHome;
 
 public class Radio {
 
-    // переключение станций
-
-    private int fm; // инкапсуляция
-    private int firstFm = 0;
+    private int currentFm;
+    private int numberOfStations;
     private int lastFm = 9;
-    private int volume;
-    private int firstVolume = 0;
-    private int lastVolume = 10;
+    private int firstFm = 0;
 
-    public void setFm(int fm) { //ранний выход сделать
-        if (fm < firstFm) {
+    public Radio() {
+    }
+
+    public Radio(int lastFm, int firstFm, int numberOfStations, int maxVolume, int minVolume) {
+        this.lastFm = lastFm;
+        this.firstFm = firstFm;
+        this.numberOfStations = numberOfStations;
+        this.maxVolume = maxVolume;
+        this.minVolume = minVolume;
+    }
+
+    public int getCurrentFm() {
+        return currentFm;
+    }
+
+    public int getLastFm() {
+        return lastFm;
+    }
+
+    public int getFirstFm() {
+        return firstFm;
+    }
+
+    public void setCurrentFm(int currentFm) {
+        if (currentFm > numberOfStations) {
             return;
         }
-        if (fm > lastFm) {
+        if (currentFm < firstFm) {
             return;
         }
-        this.fm = fm;
+        this.currentFm = currentFm;
     }
 
-    public int getFm() { // форматировать код
-        return fm;
-    }
-
-    public int nextFm() { // ошибка переключения, найти в других местах
-        if (fm < lastFm) {
-            this.fm = fm + 1;
+    public void nextFm() {
+        int currentFm = this.currentFm;
+        if (currentFm >= numberOfStations) {
+            this.currentFm = firstFm;
         } else {
-            this.fm = firstFm;
+            this.currentFm = currentFm + 1;
         }
-        return this.fm;
     }
 
-    public int prevFm() { // здесь тоже была ошибка переключения
-        if (fm > firstFm) {
-            fm = this.fm - 1;
+    public void prevFm() {
+        int currentFm = this.currentFm;
+        if (currentFm <= firstFm) {
+            this.currentFm = lastFm;
         } else {
-            this.fm = lastFm;
+            this.currentFm = currentFm - 1;
         }
-        return this.fm;
     }
 
-// переключение громкости
+    private int currentVolume;
+    private int maxVolume = 100;
+    private int minVolume = 0;
 
-    public void setVolume(int volume) {
-        if (volume < firstVolume) {
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
             return;
         }
-        if (volume > lastVolume) {
+        if (currentVolume < minVolume) {
             return;
         }
-        this.volume = volume;
+        this.currentVolume = currentVolume;
     }
 
-    public int getVolume() {
-        return volume;
-    }
-
-    public int increaseVolume() {
-        if (volume < lastVolume) {
-            this.volume = volume + 1;
+    public void nextVolume() {
+        int currentVolume = this.currentVolume;
+        if (currentVolume >= maxVolume) {
+            this.currentVolume = maxVolume;
         } else {
-            this.volume = lastVolume;
+            this.currentVolume = currentVolume + 1;
         }
-        return this.volume;
     }
 
-    public int decreaseVolume() {
-        if (volume > firstVolume) {
-            volume = volume - 1;
+    public void prevVolume() {
+        int currentVolume = this.currentVolume;
+        if (currentVolume <= minVolume) {
+            this.currentVolume = minVolume;
         } else {
-            this.volume = firstVolume;
+            this.currentVolume = currentVolume - 1;
         }
-        return this.volume;
+    }
+
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
+    public void setNumberOfStations(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
     }
 }
