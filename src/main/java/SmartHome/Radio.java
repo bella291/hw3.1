@@ -7,9 +7,6 @@ public class Radio {
     private int lastFm = 9;
     private int firstFm = 0;
 
-    public Radio() {
-    }
-
     public Radio(int lastFm, int firstFm, int numberOfStations, int maxVolume, int minVolume) {
         this.lastFm = lastFm;
         this.firstFm = firstFm;

@@ -90,4 +90,37 @@ class RadioTest {
         radio.setCurrentFm(-1);
         assertEquals(5, radio.getCurrentFm());
     }
+
+    //for 100% coverage
+    @Test
+    public void getNumberOfStations() {
+        radio.setNumberOfStations(5);
+        assertEquals(5, radio.getNumberOfStations());
+    }
+
+    @Test
+    public void setLastFm() {
+        radio.getLastFm();
+        assertEquals(9, radio.getLastFm());
+    }
+
+    @Test
+    public void setFirstFm() {
+        radio.getFirstFm();
+        assertEquals(0, radio.getFirstFm());
+    }
+
+    @Test
+    public void getMaxVolume() {
+        radio.getMaxVolume();
+        assertEquals(100, radio.getMaxVolume());
+    }
+    @Test
+    public void getMinxVolume() {
+        radio.getMinVolume();
+        assertEquals(0, radio.getMinVolume());
+    }
+
+
 }
+
