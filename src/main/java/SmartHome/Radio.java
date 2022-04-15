@@ -6,13 +6,15 @@ public class Radio {
     private int numberOfStations;
     private int lastFm = 9;
     private int firstFm = 0;
+    private int currentVolume;
+    private int maxVolume = 100;
+    private int minVolume = 0;
 
-    public Radio(int lastFm, int firstFm, int numberOfStations, int maxVolume, int minVolume) {
-        this.lastFm = lastFm;
-        this.firstFm = firstFm;
+    public Radio() {
+    }
+
+    public Radio(int numberOfStations) {
         this.numberOfStations = numberOfStations;
-        this.maxVolume = maxVolume;
-        this.minVolume = minVolume;
     }
 
     public int getCurrentFm() {
@@ -27,6 +29,26 @@ public class Radio {
         return firstFm;
     }
 
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
+    public void setNumberOfStations(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+    }
+
     public void setCurrentFm(int currentFm) {
         if (currentFm > numberOfStations) {
             return;
@@ -35,6 +57,16 @@ public class Radio {
             return;
         }
         this.currentFm = currentFm;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
+            return;
+        }
+        if (currentVolume < minVolume) {
+            return;
+        }
+        this.currentVolume = currentVolume;
     }
 
     public void nextFm() {
@@ -55,33 +87,6 @@ public class Radio {
         }
     }
 
-    private int currentVolume;
-    private int maxVolume = 100;
-    private int minVolume = 0;
-
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > maxVolume) {
-            return;
-        }
-        if (currentVolume < minVolume) {
-            return;
-        }
-        this.currentVolume = currentVolume;
-    }
-
     public void nextVolume() {
         int currentVolume = this.currentVolume;
         if (currentVolume >= maxVolume) {
@@ -99,12 +104,5 @@ public class Radio {
             this.currentVolume = currentVolume - 1;
         }
     }
-
-    public int getNumberOfStations() {
-        return numberOfStations;
-    }
-
-    public void setNumberOfStations(int numberOfStations) {
-        this.numberOfStations = numberOfStations;
-    }
 }
+

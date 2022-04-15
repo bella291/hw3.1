@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RadioTest {
-    Radio radio = new Radio(9, 0, 10, 100, 0);
+    Radio radio = new Radio(10);
 
     @Test
     public void nextFmTestNormal() {
@@ -115,12 +115,17 @@ class RadioTest {
         radio.getMaxVolume();
         assertEquals(100, radio.getMaxVolume());
     }
+
     @Test
     public void getMinxVolume() {
         radio.getMinVolume();
         assertEquals(0, radio.getMinVolume());
     }
 
-
+    @Test
+    public void useDefaultConstructor() {
+        Radio radio = new Radio();
+        assertEquals(0, radio.getCurrentFm());
+    }
 }
 
