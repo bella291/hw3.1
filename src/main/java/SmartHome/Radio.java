@@ -2,107 +2,70 @@ package SmartHome;
 
 public class Radio {
 
-    private int currentFm;
-    private int numberOfStations;
-    private int lastFm = 9;
-    private int firstFm = 0;
-    private int currentVolume;
-    private int maxVolume = 100;
-    private int minVolume = 0;
+    
+    private int maxStation;
+    private int minStation;
+    private int currentStation;
+    static final int maxVolume = 100;
+    static final int minVolume = 0;
+    private int currentVolume; 
+
 
     public Radio() {
+        this.minStation = 0;
+        this.maxStation = 9;
     }
 
-    public Radio(int numberOfStations) {
-        this.numberOfStations = numberOfStations;
+    public Radio(int counterStation) {
+        this.maxStation = counterStation - 1;
     }
 
-    public int getCurrentFm() {
-        return currentFm;
+    public int getCurrentStation() {
+        return currentStation;
+    } 
+    
+    public void setCurrentStation(int currentStation) { 
+        if (currentStation < minStation || currentStation > maxStation) {
+            return;
+        }
+        this.currentStation = currentStation;
     }
 
-    public int getLastFm() {
-        return lastFm;
+    public void setNextStation() {
+        if (currentStation == maxStation) {
+            this.currentStation = minStation;
+        } else {
+            this.currentStation = currentStation + 1;
+        }
     }
 
-    public int getFirstFm() {
-        return firstFm;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
+    public void setPrevStation() { 
+        if (currentStation == minStation) {
+            this.currentStation = maxStation;
+        } else {
+            this.currentStation = currentStation - 1;
+        }
     }
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
-    public int getNumberOfStations() {
-        return numberOfStations;
-    }
-
-    public void setNumberOfStations(int numberOfStations) {
-        this.numberOfStations = numberOfStations;
-    }
-
-    public void setCurrentFm(int currentFm) {
-        if (currentFm > numberOfStations) {
-            return;
-        }
-        if (currentFm < firstFm) {
-            return;
-        }
-        this.currentFm = currentFm;
-    }
-
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > maxVolume) {
-            return;
-        }
-        if (currentVolume < minVolume) {
-            return;
-        }
         this.currentVolume = currentVolume;
     }
 
-    public void nextFm() {
-        int currentFm = this.currentFm;
-        if (currentFm >= numberOfStations) {
-            this.currentFm = firstFm;
-        } else {
-            this.currentFm = currentFm + 1;
+    public void setVolumeUp() { 
+        if (currentVolume == maxVolume) {
+            return;
         }
+        this.currentVolume = currentVolume + 1;
     }
 
-    public void prevFm() {
-        int currentFm = this.currentFm;
-        if (currentFm <= firstFm) {
-            this.currentFm = lastFm;
-        } else {
-            this.currentFm = currentFm - 1;
+    public void setVolumeDown() {
+        if (currentVolume == minVolume) {
+            return;
         }
-    }
-
-    public void nextVolume() {
-        int currentVolume = this.currentVolume;
-        if (currentVolume >= maxVolume) {
-            this.currentVolume = maxVolume;
-        } else {
-            this.currentVolume = currentVolume + 1;
-        }
-    }
-
-    public void prevVolume() {
-        int currentVolume = this.currentVolume;
-        if (currentVolume <= minVolume) {
-            this.currentVolume = minVolume;
-        } else {
-            this.currentVolume = currentVolume - 1;
-        }
+        this.currentVolume = currentVolume - 1;
     }
 }
-
